@@ -26,14 +26,14 @@ const Home = () => {
   return (
     <>
       <div>Home</div>
+      <button onClick={() => dispatch(add(exampleProduct))}>
+        Test add new products
+      </button>
       <div>
         {products.map((product, index) => (
           <p key={index}>{JSON.stringify(product)}</p>
         ))}
       </div>
-      <button onClick={() => dispatch(add(exampleProduct))}>
-        Test add new products
-      </button>
     </>
   )
 }
