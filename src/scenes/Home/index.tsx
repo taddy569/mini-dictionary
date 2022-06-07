@@ -1,9 +1,7 @@
 import React from 'react'
 
-import { useDispatch, useSelector } from 'react-redux'
-
-import { RootState } from 'redux/store'
 import { add } from 'redux/slices'
+import { useAppDispatch, useAppSelector } from 'hooks/'
 
 const exampleProduct = {
   id: 101,
@@ -20,8 +18,8 @@ const exampleProduct = {
 }
 
 const Home = () => {
-  const products = useSelector((state: RootState) => state.products)
-  const dispatch = useDispatch()
+  const products = useAppSelector((state) => state.products)
+  const dispatch = useAppDispatch()
 
   return (
     <>
