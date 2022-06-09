@@ -11,3 +11,5 @@ export const exampleProduct = {
   thumbnail: 'https://picsum.photos/64',
   image: ['images-1', 'images-2', 'images-3', 'images-4', 'images-5'],
 }
+
+export const storeUrl = 'https://dummyjson.com'

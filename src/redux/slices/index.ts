@@ -1,1 +1,1 @@
-export { default as productsReducer, add } from './products'
+export { default as productsReducer, add, fetchProductById } from './products'
