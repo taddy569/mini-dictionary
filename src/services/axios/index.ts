@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-import { storeUrl } from 'appConstants'
+import { STORE_URL } from 'appConstants'
 
 export const axiosInstance = axios.create({
-  baseURL: storeUrl,
+  baseURL: STORE_URL,
 })

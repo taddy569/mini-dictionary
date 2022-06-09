@@ -1,1 +1,6 @@
-export { default as productsReducer, add, fetchProductById } from './products'
+export {
+  default as productsReducer,
+  add,
+  fetchProductById,
+  fetchProducts,
+} from './products'

@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 
 import { axiosInstance } from 'services/axios'
+import { generateQueryParam } from 'helpers'
+import { PRODUCTS } from 'appConstants'
 
 interface Product {
   id: number
@@ -16,12 +18,27 @@ interface Product {
   image: string[]
 }
 
+type Query = {
+  limit?: number
+  skip?: number
+  select?: string[]
+}
+
 const initialState: Product[] = []
 
 export const fetchProductById = createAsyncThunk(
   'products/fetchProductById',
   async (productId: number) => {
     const response = await axiosInstance.get(`/products/${productId}`)
+    return response.data
+  }
+)
+
+export const fetchProducts = createAsyncThunk(
+  'products/fetchProducts',
+  async (query: Query) => {
+    const builtQuery = generateQueryParam(PRODUCTS, query)
+    const response = await axiosInstance.get(builtQuery)
     return response.data
   }
 )
@@ -33,6 +50,9 @@ const productsSlice = createSlice({
     add: (state, action: PayloadAction<Product>) => {
       state.push(action.payload)
     },
+    setProducts: (state, action: PayloadAction<Product[]>) => {
+      state.concat(action.payload)
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -40,6 +60,10 @@ const productsSlice = createSlice({
         // state.push(action.payload)
       })
       .addCase(fetchProductById.rejected, (state, action) => {})
+      .addCase(fetchProducts.fulfilled, (state, action) => {
+        console.log(action.payload)
+        state.push(action.payload)
+      })
   },
 })
 

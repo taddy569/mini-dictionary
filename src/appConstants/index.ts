@@ -1,4 +1,4 @@
-export const exampleProduct = {
+export const EXAMPLE_PRODUCT = {
   id: 101,
   title: 'Example Product',
   description: 'Very simple example',
@@ -12,4 +12,12 @@ export const exampleProduct = {
   image: ['images-1', 'images-2', 'images-3', 'images-4', 'images-5'],
 }
 
-export const storeUrl = 'https://dummyjson.com'
+export const EXAMPLE_QUERY = {
+  limit: 10,
+  skip: 2,
+  select: ['title', 'price'],
+}
+
+export const STORE_URL = 'https://dummyjson.com'
+
+export const PRODUCTS = 'products'
