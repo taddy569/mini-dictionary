@@ -1,10 +1,9 @@
-type QueryType = {
-  limit?: number
-  skip?: number
-  select?: string[]
-}
+import { PaginationQueryType } from 'types'
 
-export const generateQueryParam = (subject: string, inputQuery: QueryType) => {
+export const generateQueryParam = (
+  subject: string,
+  inputQuery: PaginationQueryType
+) => {
   let builtQuery = `/${subject}?` // products, carts, users, etc
 
   if ('limit' in inputQuery) {

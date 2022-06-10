@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 import { axiosInstance } from 'services/axios'
 import { generateQueryParam } from 'helpers'
 import { PRODUCTS } from 'appConstants'
+import { PaginationQueryType, PaginationDataType } from 'types'
 
 interface Product {
   id: number
@@ -18,13 +19,12 @@ interface Product {
   image: string[]
 }
 
-type Query = {
-  limit?: number
-  skip?: number
-  select?: string[]
+const initialState: PaginationDataType<Product> = {
+  limit: 0,
+  skip: '0',
+  total: 0,
+  data: [],
 }
-
-const initialState: Product[] = []
 
 export const fetchProductById = createAsyncThunk(
   'products/fetchProductById',
@@ -36,7 +36,7 @@ export const fetchProductById = createAsyncThunk(
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async (query: Query) => {
+  async (query: PaginationQueryType) => {
     const builtQuery = generateQueryParam(PRODUCTS, query)
     const response = await axiosInstance.get(builtQuery)
     return response.data
@@ -48,10 +48,10 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action: PayloadAction<Product>) => {
-      state.push(action.payload)
+      // state.products.push(action.payload)
     },
     setProducts: (state, action: PayloadAction<Product[]>) => {
-      state.concat(action.payload)
+      // state.products.concat(action.payload)
     },
   },
   extraReducers: (builder) => {
@@ -61,8 +61,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProductById.rejected, (state, action) => {})
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        console.log(action.payload)
-        state.push(action.payload)
+        state.data = state.data.concat(action.payload.products)
       })
   },
 })

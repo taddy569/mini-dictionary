@@ -14,8 +14,8 @@ export const EXAMPLE_PRODUCT = {
 
 export const EXAMPLE_QUERY = {
   limit: 10,
-  skip: 2,
-  select: ['title', 'price'],
+  skip: '2',
+  select: ['title', 'price', 'thumbnail'],
 }
 
 export const STORE_URL = 'https://dummyjson.com'
