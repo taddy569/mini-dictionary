@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Link, useParams } from 'react-router-dom'
+import { Link, NavLink, useParams } from 'react-router-dom'
 
 import { useAppSelector } from 'hooks'
 
@@ -24,12 +24,17 @@ const ProductDetail: React.FunctionComponent = () => {
 
   return (
     <>
-      <img
-        className="inline object-scale-down w-32 h-32"
-        src={product[0].thumbnail}
-      />
-      <p>{product[0].title}</p>
-      <h3>{product[0].price}</h3>
+      <NavLink to="/products">
+        <button>Back</button>
+      </NavLink>
+      <div>
+        <img
+          className="inline object-scale-down w-32 h-32"
+          src={product[0].thumbnail}
+        />
+        <p>{product[0].title}</p>
+        <h3>{product[0].price}</h3>
+      </div>
     </>
   )
 }
