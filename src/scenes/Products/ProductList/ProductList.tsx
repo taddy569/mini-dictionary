@@ -3,8 +3,10 @@ import React, { useEffect } from 'react'
 import { add, fetchProductById, fetchProducts } from 'redux/slices'
 import { useAppDispatch, useAppSelector } from 'hooks/'
 import { EXAMPLE_PRODUCT, EXAMPLE_QUERY } from 'appConstants'
+import { ProductType } from 'types'
+import { ProductItem } from '../ProductItem'
 
-const Home = () => {
+const ProductList: React.FunctionComponent = () => {
   const productsData = useAppSelector((state) => state.products.data)
   const dispatch = useAppDispatch()
 
@@ -55,19 +57,12 @@ const Home = () => {
   }
 
   return (
-    <div className="grid gap-4 grid-cols-3">
-      {productsData.map((product) => (
-        <div key={product.id}>
-          <img
-            className="inline object-scale-down w-32 h-32"
-            src={product.thumbnail}
-          />
-          <p>{product.title}</p>
-          <h3>{product.price}</h3>
-        </div>
+    <div className="container mx-auto grid gap-1 grid-cols-4">
+      {productsData.map((product: ProductType) => (
+        <ProductItem key={product.id} product={product} />
       ))}
     </div>
   )
 }
 
-export default Home
+export default ProductList
