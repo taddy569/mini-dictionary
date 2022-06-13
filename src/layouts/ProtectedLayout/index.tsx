@@ -1,10 +1,13 @@
 import React from 'react'
 
-import { Outlet } from 'react-router-dom'
+import { NavBar } from 'components/composited'
+import { WrapperOutlet } from 'components/base'
 
 const ProtectedLayout: React.FC = () => (
   <>
-    <Outlet />
+    <NavBar />
+    <WrapperOutlet wrapperStyle="mt-8" />
+    {/* <footer /> */}
   </>
 )
 
