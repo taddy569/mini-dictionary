@@ -8,7 +8,10 @@ const ProductItem: React.FunctionComponent<{ product: ProductType }> = ({
   product,
 }) => {
   return (
-    <Link to={`/products/${product.id}`}>
+    <Link
+      to={`/products/${product.id}`}
+      className="flex flex-col justify-center items-center "
+    >
       <img
         className="inline object-scale-down w-32 h-32"
         src={product.thumbnail}
