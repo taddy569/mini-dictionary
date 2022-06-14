@@ -2,18 +2,13 @@ import React from 'react'
 
 import { Outlet } from 'react-router-dom'
 
-type WrapperOutletType = {
-  wrapperStyle: string
-}
+import StyleWrapperOutlet from './style'
 
-const WrapperOutlet: React.FunctionComponent<WrapperOutletType> = (
-  props: WrapperOutletType
-) => {
-  const { wrapperStyle } = props
+const WrapperOutlet: React.FunctionComponent = () => {
   return (
-    <div className={`${wrapperStyle}`}>
+    <StyleWrapperOutlet>
       <Outlet />
-    </div>
+    </StyleWrapperOutlet>
   )
 }
 

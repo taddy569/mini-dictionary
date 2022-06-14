@@ -6,7 +6,7 @@ import { WrapperOutlet } from 'components/base'
 const ProtectedLayout: React.FC = () => (
   <>
     <NavBar />
-    <WrapperOutlet wrapperStyle="mt-8" />
+    <WrapperOutlet />
     {/* <footer /> */}
   </>
 )
