@@ -14,7 +14,7 @@ export const EXAMPLE_PRODUCT = {
 
 export const EXAMPLE_QUERY = {
   limit: 10,
-  skip: '2',
+  skip: '0',
   select: ['title', 'price', 'thumbnail'],
 }
 

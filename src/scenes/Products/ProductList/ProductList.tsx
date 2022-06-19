@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from 'hooks/'
 import { EXAMPLE_PRODUCT, EXAMPLE_QUERY } from 'appConstants'
 import { ProductType } from 'types'
 import { ProductItem } from '../ProductItem'
+import { Pagination } from 'components/composited'
 
 const ProductList: React.FunctionComponent = () => {
   const productsData = useAppSelector((state) => state.products.data)
@@ -70,6 +71,7 @@ const ProductList: React.FunctionComponent = () => {
           <ProductItem key={product.id} product={product} />
         ))}
       </Grid>
+      <Pagination typeOfData={'products'} />
     </Box>
   )
 }

@@ -6,11 +6,10 @@ import { ProductType } from 'types'
 import { CustomLink, CustomImage } from './style'
 
 const ProductItem: React.FunctionComponent<{
-  key: number
   product: ProductType
-}> = ({ key, product }) => {
+}> = ({ product }) => {
   return (
-    <Grid item xs={2} sm={4} md={4} key={key}>
+    <Grid item xs={2} sm={4} md={4}>
       <CustomLink
         to={`/products/${product.id}`}
         className="flex flex-col justify-center items-center "

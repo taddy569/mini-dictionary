@@ -6,7 +6,7 @@ import { PRODUCTS } from 'appConstants'
 import { PaginationQueryType, PaginationDataType, ProductType } from 'types'
 
 const initialState: PaginationDataType<ProductType> = {
-  limit: 0,
+  limit: 10,
   skip: '0',
   total: 0,
   data: [],
@@ -39,6 +39,9 @@ const productsSlice = createSlice({
     setProducts: (state, action: PayloadAction<ProductType[]>) => {
       // state.products.concat(action.payload)
     },
+    setItemsPerPage: (state, action: PayloadAction<number>) => {
+      state.limit = action.payload
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -47,11 +50,15 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProductById.rejected, (state, action) => {})
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.data = state.data.concat(action.payload.products)
+        const { products, limit, skip, total } = action.payload
+        state.data = products
+        // state.limit = limit
+        state.skip = skip
+        state.total = total
       })
   },
 })
 
-export const { add } = productsSlice.actions
+export const { add, setItemsPerPage } = productsSlice.actions
 
 export default productsSlice.reducer
