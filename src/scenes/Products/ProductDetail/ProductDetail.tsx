@@ -3,6 +3,7 @@ import React from 'react'
 import { Link, NavLink, useParams } from 'react-router-dom'
 
 import { useAppSelector } from 'hooks'
+import ProductDetailWrapper from './style'
 
 const ProductDetail: React.FunctionComponent = () => {
   const { id } = useParams()
@@ -23,7 +24,7 @@ const ProductDetail: React.FunctionComponent = () => {
   }
 
   return (
-    <>
+    <ProductDetailWrapper>
       <NavLink to="/products">
         <button>Back</button>
       </NavLink>
@@ -35,7 +36,7 @@ const ProductDetail: React.FunctionComponent = () => {
         <p>{product[0].title}</p>
         <h3>{product[0].price}</h3>
       </div>
-    </>
+    </ProductDetailWrapper>
   )
 }
 

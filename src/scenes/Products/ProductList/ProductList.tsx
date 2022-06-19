@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react'
 
+import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
+
 import { add, fetchProductById, fetchProducts } from 'redux/slices'
 import { useAppDispatch, useAppSelector } from 'hooks/'
 import { EXAMPLE_PRODUCT, EXAMPLE_QUERY } from 'appConstants'
@@ -57,11 +60,17 @@ const ProductList: React.FunctionComponent = () => {
   }
 
   return (
-    <div className="container mx-auto grid gap-1 grid-cols-4">
-      {productsData.map((product: ProductType) => (
-        <ProductItem key={product.id} product={product} />
-      ))}
-    </div>
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
+        {productsData.map((product: ProductType) => (
+          <ProductItem key={product.id} product={product} />
+        ))}
+      </Grid>
+    </Box>
   )
 }
 

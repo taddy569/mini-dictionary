@@ -1,24 +1,25 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
+import Grid from '@mui/material/Grid'
 
 import { ProductType } from 'types'
+import { CustomLink, CustomImage } from './style'
 
-const ProductItem: React.FunctionComponent<{ product: ProductType }> = ({
-  product,
-}) => {
+const ProductItem: React.FunctionComponent<{
+  key: number
+  product: ProductType
+}> = ({ key, product }) => {
   return (
-    <Link
-      to={`/products/${product.id}`}
-      className="flex flex-col justify-center items-center "
-    >
-      <img
-        className="inline object-scale-down w-32 h-32"
-        src={product.thumbnail}
-      />
-      <p>{product.title}</p>
-      <h3>{product.price}</h3>
-    </Link>
+    <Grid item xs={2} sm={4} md={4} key={key}>
+      <CustomLink
+        to={`/products/${product.id}`}
+        className="flex flex-col justify-center items-center "
+      >
+        <CustomImage src={product.thumbnail} />
+        <p>{product.title}</p>
+        <h3>{product.price}</h3>
+      </CustomLink>
+    </Grid>
   )
 }
 
