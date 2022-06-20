@@ -5,6 +5,11 @@ import { generateQueryParam } from 'helpers'
 import { PRODUCTS } from 'appConstants'
 import { PaginationQueryType, PaginationDataType, ProductType } from 'types'
 
+// interface ProductsDataType {
+//   paginationData: PaginationDataType<ProductType>
+//   currentProduct: ProductType
+// }
+
 const initialState: PaginationDataType<ProductType> = {
   limit: 10,
   skip: '0',
@@ -12,19 +17,19 @@ const initialState: PaginationDataType<ProductType> = {
   data: [],
 }
 
-export const fetchProductById = createAsyncThunk(
-  'products/fetchProductById',
-  async (productId: number) => {
-    const response = await axiosInstance.get(`/products/${productId}`)
-    return response.data
-  }
-)
-
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async (query: PaginationQueryType) => {
     const builtQuery = generateQueryParam(PRODUCTS, query)
     const response = await axiosInstance.get(builtQuery)
+    return response.data
+  }
+)
+
+export const fetchProductById = createAsyncThunk(
+  'products/fetchProductById',
+  async (productId: number) => {
+    const response = await axiosInstance.get(`/products/${productId}`)
     return response.data
   }
 )
@@ -47,6 +52,13 @@ const productsSlice = createSlice({
     builder
       .addCase(fetchProductById.fulfilled, (state, action) => {
         // state.push(action.payload)
+        const updateData = state.data.map((item) => {
+          if (item.id === action.payload.id) {
+            item = action.payload
+          }
+          return item
+        })
+        state.data = updateData
       })
       .addCase(fetchProductById.rejected, (state, action) => {})
       .addCase(fetchProducts.fulfilled, (state, action) => {

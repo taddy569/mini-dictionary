@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Link, NavLink, useParams } from 'react-router-dom'
 
-import { useAppSelector } from 'hooks'
-import ProductDetailWrapper from './style'
+import { useAppDispatch, useAppSelector } from 'hooks'
+import { fetchProductById } from 'redux/slices'
+import {
+  Wrapper,
+  WrapperProductDetail,
+  WrapperProductImages,
+  WrapperProductInformation,
+} from './style'
 
 const ProductDetail: React.FunctionComponent = () => {
   const { id } = useParams()
@@ -15,8 +21,15 @@ const ProductDetail: React.FunctionComponent = () => {
       </>
     )
 
+  const dispatch = useAppDispatch()
+  const parsedIntId = Number.parseInt(id)
+
+  useEffect(() => {
+    dispatch(fetchProductById(parsedIntId))
+  }, [])
+
   const product = useAppSelector((state) =>
-    state.products.data.filter((product) => product.id.toString() === id)
+    state.products.data.filter((product) => product.id === parsedIntId)
   )
 
   if (product.length === 0) {
@@ -24,19 +37,29 @@ const ProductDetail: React.FunctionComponent = () => {
   }
 
   return (
-    <ProductDetailWrapper>
+    <Wrapper>
       <NavLink to="/products">
         <button>Back</button>
       </NavLink>
-      <div>
-        <img
-          className="inline object-scale-down w-32 h-32"
-          src={product[0].thumbnail}
-        />
-        <p>{product[0].title}</p>
-        <h3>{product[0].price}</h3>
-      </div>
-    </ProductDetailWrapper>
+      <WrapperProductDetail>
+        <WrapperProductImages>
+          <img
+            className="inline object-scale-down w-32 h-32"
+            src={product[0].thumbnail}
+          />
+        </WrapperProductImages>
+        <WrapperProductInformation>
+          <p>{product[0].title}</p>
+          <h3>{product[0].price}</h3>
+          <p>{product[0].discountPercentage}</p>
+          <p>{product[0].rating}</p>
+          <p>{product[0].description}</p>
+          <p>{product[0].stock}</p>
+          <p>{product[0].brand}</p>
+          <p>{product[0].category}</p>
+        </WrapperProductInformation>
+      </WrapperProductDetail>
+    </Wrapper>
   )
 }
 
