@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 
 import Grid from '@mui/material/Grid'
 import Box from '@mui/material/Box'
+import Container from '@mui/material/Container'
 
 import { add, fetchProductById, fetchProducts } from 'redux/slices'
 import { useAppDispatch, useAppSelector } from 'hooks/'
@@ -61,18 +62,16 @@ const ProductList: React.FunctionComponent = () => {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid
-        container
-        spacing={{ xs: 2, md: 3 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
-      >
+    <>
+      <Grid container spacing={1}>
         {productsData.map((product: ProductType) => (
           <ProductItem key={product.id} product={product} />
         ))}
       </Grid>
-      <Pagination typeOfData={'products'} />
-    </Box>
+      <Container>
+        <Pagination typeOfData={'products'} />
+      </Container>
+    </>
   )
 }
 

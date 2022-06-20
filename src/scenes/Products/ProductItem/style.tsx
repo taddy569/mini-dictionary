@@ -12,5 +12,5 @@ export const CustomImage = styled('img')(() => ({
   display: 'inline',
   width: '8rem',
   height: '8rem',
-  objectFit: 'scale-down',
+  objectFit: 'cover',
 }))

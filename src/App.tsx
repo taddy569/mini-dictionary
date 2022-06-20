@@ -2,16 +2,16 @@ import React from 'react'
 
 import { Provider } from 'react-redux'
 
-import './App.css'
 import AppRouter from 'routers'
 import { store } from 'redux/store'
+import { WrapperApp } from './App.style'
 
 function App() {
   return (
     <Provider store={store}>
-      <div className="">
+      <WrapperApp>
         <AppRouter />
-      </div>
+      </WrapperApp>
     </Provider>
   )
 }

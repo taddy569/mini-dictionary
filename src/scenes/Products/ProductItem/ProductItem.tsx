@@ -9,11 +9,8 @@ const ProductItem: React.FunctionComponent<{
   product: ProductType
 }> = ({ product }) => {
   return (
-    <Grid item xs={2} sm={4} md={4}>
-      <CustomLink
-        to={`/products/${product.id}`}
-        className="flex flex-col justify-center items-center "
-      >
+    <Grid item xs={6} sm={4} md={3}>
+      <CustomLink to={`/products/${product.id}`}>
         <CustomImage src={product.thumbnail} />
         <p>{product.title}</p>
         <h3>{product.price}</h3>
