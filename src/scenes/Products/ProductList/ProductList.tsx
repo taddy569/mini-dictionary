@@ -11,7 +11,7 @@ import { ProductItem } from '../ProductItem'
 import { Pagination } from 'components/composited'
 
 const ProductList: React.FunctionComponent = () => {
-  const productsData = useAppSelector((state) => state.products.data)
+  const productsData = useAppSelector((state) => state.products.pagination.data)
   const dispatch = useAppDispatch()
 
   useEffect(() => {

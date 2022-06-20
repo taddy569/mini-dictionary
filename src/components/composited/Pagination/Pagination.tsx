@@ -10,7 +10,7 @@ const Pagination: React.FunctionComponent<{
   typeOfData: 'products'
 }> = ({ typeOfData }) => {
   const productsData = useAppSelector((state) => state[typeOfData])
-  const { total } = productsData
+  const { total } = productsData.pagination
 
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(10)

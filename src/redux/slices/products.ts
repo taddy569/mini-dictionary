@@ -2,19 +2,22 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 
 import { axiosInstance } from 'services/axios'
 import { generateQueryParam } from 'helpers'
-import { PRODUCTS } from 'appConstants'
+import { PRODUCTS, EXAMPLE_PRODUCT } from 'appConstants'
 import { PaginationQueryType, PaginationDataType, ProductType } from 'types'
 
-// interface ProductsDataType {
-//   paginationData: PaginationDataType<ProductType>
-//   currentProduct: ProductType
-// }
+interface ProductsDataType {
+  pagination: PaginationDataType<ProductType>
+  currentProduct: ProductType
+}
 
-const initialState: PaginationDataType<ProductType> = {
-  limit: 10,
-  skip: '0',
-  total: 0,
-  data: [],
+const initialState: ProductsDataType = {
+  pagination: {
+    limit: 10,
+    skip: '0',
+    total: 0,
+    data: [],
+  },
+  currentProduct: EXAMPLE_PRODUCT,
 }
 
 export const fetchProducts = createAsyncThunk(
@@ -45,28 +48,30 @@ const productsSlice = createSlice({
       // state.products.concat(action.payload)
     },
     setItemsPerPage: (state, action: PayloadAction<number>) => {
-      state.limit = action.payload
+      state.pagination.limit = action.payload
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProductById.fulfilled, (state, action) => {
         // state.push(action.payload)
-        const updateData = state.data.map((item) => {
-          if (item.id === action.payload.id) {
-            item = action.payload
-          }
-          return item
-        })
-        state.data = updateData
+
+        // const updateData = state.pagination.data.map((item) => {
+        //   if (item.id === action.payload.id) {
+        //     item = action.payload
+        //   }
+        //   return item
+        // })
+        // state.pagination.data = updateData
+
+        state.currentProduct = action.payload
       })
       .addCase(fetchProductById.rejected, (state, action) => {})
       .addCase(fetchProducts.fulfilled, (state, action) => {
         const { products, limit, skip, total } = action.payload
-        state.data = products
-        // state.limit = limit
-        state.skip = skip
-        state.total = total
+        state.pagination.data = products
+        state.pagination.skip = skip
+        state.pagination.total = total
       })
   },
 })
