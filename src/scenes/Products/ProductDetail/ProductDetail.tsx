@@ -3,6 +3,11 @@ import React, { useEffect } from 'react'
 import { Link, NavLink, useParams } from 'react-router-dom'
 import Divider from '@mui/material/Divider'
 import Container from '@mui/material/Container'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
+import Rating from '@mui/material/Rating'
+import Button from '@mui/material/Button'
+import ButtonGroup from '@mui/material/ButtonGroup'
 
 import { useAppDispatch, useAppSelector } from 'hooks'
 import { fetchProductById } from 'redux/slices'
@@ -37,30 +42,142 @@ const ProductDetail: React.FunctionComponent = () => {
     return <>There is no product like that...</>
   }
 
+  const preDiscountPrice = Math.round(
+    (product.price / (100 - product.discountPercentage)) * 100
+  )
+  const savePrice = preDiscountPrice - product.price
+
+  // return (
+  //   <Wrapper>
+  //     <NavLink to="/products">
+  //       <button>Back</button>
+  //     </NavLink>
+  //     <WrapperProductDetail>
+  //       <WrapperProductImages>
+  //         <StyledImage src={product.thumbnail} />
+  //       </WrapperProductImages>
+  //       {/* <WrapperProductInformation> */}
+  //       <Container>
+  //         <h1>{product.title}</h1>
+  //         <Divider />
+  //         <h3>{product.price}</h3>
+  //         <h4>{product.discountPercentage}</h4>
+  //         <p>{product.rating}</p>
+  //         <p>{product.description}</p>
+  //         <a>{product.stock}</a>
+  //         <p>{product.brand}</p>
+  //         <p>{product.category}</p>
+  //         {/* </WrapperProductInformation> */}
+  //       </Container>
+  //     </WrapperProductDetail>
+  //   </Wrapper>
+  // )
+
   return (
-    <Wrapper>
-      <NavLink to="/products">
-        <button>Back</button>
-      </NavLink>
-      <WrapperProductDetail>
-        <WrapperProductImages>
-          <StyledImage src={product.thumbnail} />
-        </WrapperProductImages>
+    <Container>
+      <Grid container spacing={2} mt={2}>
+        <Grid item xs={12} sm={4} md={6}>
+          <Container>
+            <StyledImage src={product.thumbnail} />
+          </Container>
+        </Grid>
         {/* <WrapperProductInformation> */}
-        <Container>
-          <h1>{product.title}</h1>
+        <Grid
+          item
+          container
+          xs={12}
+          sm={8}
+          md={6}
+          rowSpacing={2}
+          alignItems="center"
+        >
+          <Grid item xs={12} alignItems="center">
+            <Typography variant="h4" color="text.primary">
+              {product.title}
+            </Typography>
+            <Grid
+              item
+              container
+              xs={12}
+              columns={{ xs: 12, sm: 10, md: 8, lg: 6, xl: 6 }}
+              alignItems="center"
+            >
+              <Grid item xs={4.5} sm={4} md={2.5} lg={1.5} xl={1.5}>
+                <Rating value={product.rating} precision={0.1} readOnly />
+              </Grid>
+              <Grid item xs={5.5} sm={6} md={5.5} lg={4.5} xl={4.5}>
+                <Typography variant="h6">{`${product.rating}/5`}</Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+
           <Divider />
-          <h3>{product.price}</h3>
-          <h4>{product.discountPercentage}</h4>
-          <p>{product.rating}</p>
-          <p>{product.description}</p>
-          <a>{product.stock}</a>
-          <p>{product.brand}</p>
-          <p>{product.category}</p>
-          {/* </WrapperProductInformation> */}
-        </Container>
-      </WrapperProductDetail>
-    </Wrapper>
+
+          <Grid
+            item
+            container
+            alignItems="center"
+            xs={12}
+            columns={{ xs: 12, sm: 8, md: 6 }}
+          >
+            <Grid item xs={3} sm={2} md={1}>
+              <Typography variant="h6" color="text.primary">
+                {`$ ${product.price}`}
+              </Typography>
+            </Grid>
+            <Grid item xs={3} sm={2} md={1}>
+              <Typography
+                variant="subtitle2"
+                color="text.secondary"
+                sx={{
+                  textDecorationLine: 'line-through',
+                }}
+              >
+                {`$ ${preDiscountPrice}`}
+              </Typography>
+            </Grid>
+            <Grid item xs={6} sm={4} md={4}>
+              <Typography variant="subtitle1">{`Now ${product.discountPercentage}% off`}</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="h6" color={'red'}>
+                {`Save $ ${savePrice}`}
+              </Typography>
+            </Grid>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Typography variant="h6">Quantity</Typography>
+            <ButtonGroup>
+              <Button>-</Button>
+              <Button disabled>
+                {/* <Typography variant="h6">{product.stock}</Typography> */}
+                <Typography variant="h6">1</Typography>
+              </Button>
+              <Button>+</Button>
+            </ButtonGroup>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Typography variant="subtitle1">{`Brand: ${product.brand}`}</Typography>
+            <Typography variant="subtitle1">{`Category: ${product.category}`}</Typography>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Button fullWidth variant="contained" color="error">
+              Add to Cart
+            </Button>
+          </Grid>
+        </Grid>
+
+        <Grid item xs={12}>
+          <Typography variant="h5" color="text.secondary">
+            Description
+          </Typography>
+          <Typography variant="subtitle1">{product.description}</Typography>
+        </Grid>
+      </Grid>
+    </Container>
   )
 }
 

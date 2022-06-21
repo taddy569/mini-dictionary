@@ -19,15 +19,16 @@ export const WrapperProductDetail = styled('div')(() => ({
 }))
 
 export const WrapperProductImages = styled('div')(() => ({
-  border: '1px black dotted',
+  border: '4px black dotted',
   backgroundColor: 'yellowgreen',
   width: '100%',
 }))
 
 export const StyledImage = styled('img')(() => ({
-  height: 'auto',
+  height: '40vh',
   width: '100%',
-  maxWidth: '100%',
+  objectFit: 'scale-down',
+  border: '1px gray dotted',
 }))
 
 export const WrapperProductInformation = styled('div')(() => ({
