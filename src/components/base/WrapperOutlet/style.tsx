@@ -9,7 +9,7 @@ const WrapperOutlet = styled(Container)(() => ({
   // marginTop: '64px',
   // marginLeft: 'auto',
   // marginRight: 'auto',
-  border: '5px red dotted',
+  // border: '5px red dotted',
 }))
 
 export default WrapperOutlet

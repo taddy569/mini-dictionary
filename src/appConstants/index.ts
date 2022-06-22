@@ -9,7 +9,7 @@ export const EXAMPLE_PRODUCT = {
   brand: 'Example',
   category: 'Sample Category',
   thumbnail: 'https://picsum.photos/64',
-  image: ['images-1', 'images-2', 'images-3', 'images-4', 'images-5'],
+  images: ['images-1', 'images-2', 'images-3', 'images-4', 'images-5'],
 }
 
 export const EXAMPLE_QUERY = {

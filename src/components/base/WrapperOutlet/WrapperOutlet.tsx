@@ -10,9 +10,11 @@ const WrapperOutlet: React.FunctionComponent = () => {
     <StyleWrapperOutlet>
       <Grid
         container
-        style={{
-          border: '3px green dotted',
-        }}
+        style={
+          {
+            // border: '3px green dotted',
+          }
+        }
       >
         <Outlet />
       </Grid>

@@ -1,5 +1,4 @@
 import { styled } from '@mui/material/styles'
-import { height } from '@mui/system'
 
 export const Wrapper = styled('div')(() => ({
   display: 'flex',
@@ -25,10 +24,9 @@ export const WrapperProductImages = styled('div')(() => ({
 }))
 
 export const StyledImage = styled('img')(() => ({
-  height: '40vh',
+  height: 'auto',
   width: '100%',
   objectFit: 'scale-down',
-  border: '1px gray dotted',
 }))
 
 export const WrapperProductInformation = styled('div')(() => ({
