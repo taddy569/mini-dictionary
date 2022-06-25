@@ -1,5 +1,11 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
+import {
+  createSlice,
+  createAsyncThunk,
+  PayloadAction,
+  Update,
+} from '@reduxjs/toolkit'
 import { axiosInstance } from 'services/axios'
+import products from './products'
 
 interface ProductCartType {
   id: number
@@ -29,25 +35,58 @@ const initialState: CartsDataType = {
 
 type UpdateCartType = {
   productId: number
-  quantity: number
+  quantity?: number
 }
 
 const cartsSlice = createSlice({
   name: 'carts',
   initialState,
   reducers: {
-    update: (state, action: PayloadAction<UpdateCartType>) => {
-      const newState = state.products.map((product) => {
-        if (product.id === action.payload.productId) {
+    addProductToCart: (state, action: PayloadAction<ProductCartType>) => {
+      const newProduct = action.payload
+      state.products.push(newProduct)
+    },
+    updateProductOnCart: (state, action: PayloadAction<UpdateCartType>) => {
+      state.products = state.products.map((product) => {
+        if (
+          product.id === action.payload.productId &&
+          action.payload.quantity
+        ) {
           product.quantity += action.payload.quantity
         }
         return product
       })
-      state.products = newState
+    },
+    increaseProductOnCart: (state, action: PayloadAction<UpdateCartType>) => {
+      state.products = state.products.map((product) => {
+        if (product.id === action.payload.productId) {
+          product.quantity += 1
+        }
+        return product
+      })
+    },
+    decreaseProductOnCart: (state, action: PayloadAction<UpdateCartType>) => {
+      state.products = state.products.map((product) => {
+        if (product.id === action.payload.productId) {
+          product.quantity -= 1
+        }
+        return product
+      })
+    },
+    removeProductFromCart: (state, action: PayloadAction<UpdateCartType>) => {
+      state.products = state.products.filter(
+        (product) => product.id === action.payload.productId
+      )
     },
   },
 })
 
-export const { update } = cartsSlice.actions
+export const {
+  addProductToCart,
+  updateProductOnCart,
+  increaseProductOnCart,
+  decreaseProductOnCart,
+  removeProductFromCart,
+} = cartsSlice.actions
 
 export default cartsSlice.reducer
