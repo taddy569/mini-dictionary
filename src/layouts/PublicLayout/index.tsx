@@ -1,9 +1,11 @@
 import React from 'react'
 
+import { WrapperOutlet } from 'components/base'
+
 const PublicLayout = () => (
-  <h1 className="text-3xl font-bold underline">
-    Hello world! This is Public Layout
-  </h1>
+  <>
+    <WrapperOutlet />
+  </>
 )
 
 export default PublicLayout

@@ -70,17 +70,24 @@ const NavBar = () => {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              // aria-controls={menuId}
-              aria-haspopup="true"
-              // onClick={handleProfileMenuOpen}
-              color="inherit"
+            <NavLink
+              to="/auth/login"
+              style={{
+                color: 'white',
+              }}
             >
-              <AccountCircle />
-            </IconButton>
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                // aria-controls={menuId}
+                aria-haspopup="true"
+                // onClick={handleProfileMenuOpen}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+            </NavLink>
           </Box>
         </Toolbar>
       </AppBar>
