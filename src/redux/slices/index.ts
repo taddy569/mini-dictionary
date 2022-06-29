@@ -14,3 +14,5 @@ export {
   decreaseProductOnCart,
   removeProductFromCart,
 } from './carts'
+
+export { default as authReducer, requestLogin } from './auth'

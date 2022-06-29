@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import logger from 'redux-logger'
 
-import { productsReducer, cartsReducer } from './slices'
+import { productsReducer, cartsReducer, authReducer } from './slices'
 
 export const store = configureStore({
   reducer: {
     products: productsReducer,
     carts: cartsReducer,
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 })
