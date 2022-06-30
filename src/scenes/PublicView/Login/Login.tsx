@@ -10,6 +10,7 @@ import Checkbox from '@mui/material/Checkbox'
 import Button from '@mui/material/Button'
 import Link from '@mui/material/Link'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { useAppDispatch } from 'hooks'
 import { requestLogin } from 'redux/slices'
@@ -19,8 +20,19 @@ type InputLogin = {
   password: string
 }
 
+type CustomLocationProps = {
+  state: {
+    from: Location
+  }
+}
+
 const Login = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+
+  // https://github.com/reach/router/issues/414
+  const location = useLocation() as CustomLocationProps
+  const from = location.state?.from?.pathname || '/'
 
   const {
     register,
@@ -32,8 +44,14 @@ const Login = () => {
       password: '0lelplR',
     },
   })
+
   const onSubmit: SubmitHandler<InputLogin> = (data) => {
     dispatch(requestLogin(data))
+      .then(() => {
+        navigate(from, { replace: true })
+      })
+      .catch(() => {})
+      .finally(() => {})
   }
 
   return (

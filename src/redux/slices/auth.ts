@@ -20,8 +20,8 @@ const initialState = {
 
 export const requestLogin = createAsyncThunk(
   'auth/login',
-  async (loginData: LoginDataType) => {
-    const response = await axiosInstance.post('/auth/login', loginData)
+  async (data: LoginDataType) => {
+    const response = await axiosInstance.post('/auth/login', data)
     return response.data
   }
 )
@@ -33,7 +33,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(requestLogin.rejected, (state, action) => {
-        console.log('Auth failed!')
+        // console.log('Auth failed!')
       })
       .addCase(requestLogin.fulfilled, (state, action) => {
         // https://stackoverflow.com/questions/70524973/createslices-extrareducer-action-not-updating-the-state
