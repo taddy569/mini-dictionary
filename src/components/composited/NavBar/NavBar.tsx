@@ -16,6 +16,7 @@ import { NavLink } from 'react-router-dom'
 import { Search } from 'components/base'
 import { useAppDispatch } from 'hooks'
 import { logOut } from 'redux/slices'
+import { UserMenu } from './UserMenu'
 
 const NavBar = () => {
   const dispatch = useAppDispatch()
@@ -49,7 +50,7 @@ const NavBar = () => {
           {/* <ShoppingCart /> */}
 
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          {/* <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <NavLink
               to="/carts"
               style={{
@@ -75,12 +76,12 @@ const NavBar = () => {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            {/* <NavLink
+            <NavLink
               to="/auth/login"
               style={{
                 color: 'white',
               }}
-            > */}
+            >
             <IconButton
               size="large"
               edge="end"
@@ -93,8 +94,10 @@ const NavBar = () => {
             >
               <AccountCircle />
             </IconButton>
-            {/* </NavLink> */}
-          </Box>
+            </NavLink>
+          </Box> */}
+
+          <UserMenu />
         </Toolbar>
       </AppBar>
     </Box>
