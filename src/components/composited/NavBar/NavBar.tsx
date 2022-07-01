@@ -11,12 +11,17 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import MenuIcon from '@mui/icons-material/Menu'
 import ShoppingCart from '@mui/icons-material/ShoppingCart'
-
 import { NavLink } from 'react-router-dom'
 
 import { Search } from 'components/base'
+import { useAppDispatch } from 'hooks'
+import { logOut } from 'redux/slices'
 
 const NavBar = () => {
+  const dispatch = useAppDispatch()
+  const handleSignOut = () => {
+    dispatch(logOut())
+  }
   return (
     <Box>
       <AppBar color="primary">
@@ -70,24 +75,25 @@ const NavBar = () => {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <NavLink
+            {/* <NavLink
               to="/auth/login"
               style={{
                 color: 'white',
               }}
+            > */}
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              // aria-controls={menuId}
+              aria-haspopup="true"
+              // onClick={handleProfileMenuOpen}
+              color="inherit"
+              onClick={handleSignOut}
             >
-              <IconButton
-                size="large"
-                edge="end"
-                aria-label="account of current user"
-                // aria-controls={menuId}
-                aria-haspopup="true"
-                // onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            </NavLink>
+              <AccountCircle />
+            </IconButton>
+            {/* </NavLink> */}
           </Box>
         </Toolbar>
       </AppBar>

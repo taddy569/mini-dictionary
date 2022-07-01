@@ -29,7 +29,11 @@ export const requestLogin = createAsyncThunk(
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    logOut: (state) => {
+      return initialState
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(requestLogin.rejected, (state, action) => {
@@ -42,6 +46,6 @@ const authSlice = createSlice({
   },
 })
 
-export const {} = authSlice.actions
+export const { logOut } = authSlice.actions
 
 export default authSlice.reducer

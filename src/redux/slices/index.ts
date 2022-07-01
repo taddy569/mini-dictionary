@@ -15,4 +15,4 @@ export {
   removeProductFromCart,
 } from './carts'
 
-export { default as authReducer, requestLogin } from './auth'
+export { default as authReducer, requestLogin, logOut } from './auth'
