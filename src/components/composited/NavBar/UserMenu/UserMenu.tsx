@@ -7,10 +7,22 @@ import Avatar from '@mui/material/Avatar'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import Typography from '@mui/material/Typography'
+import Divider from '@mui/material/Divider'
+import Link from '@mui/material/Link'
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+import { useAppDispatch, useAppSelector } from 'hooks'
+import { logOut } from 'redux/slices'
+
+const settings = [
+  { label: 'Profile', value: 'profile' },
+  { label: 'Setting', value: 'setting' },
+]
 
 const UserMenu = () => {
+  const dispatch = useAppDispatch()
+  const userName = useAppSelector((state) => state.auth.username)
+  const userImage = useAppSelector((state) => state.auth.image)
+
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -21,13 +33,23 @@ const UserMenu = () => {
     setAnchorElUser(null)
   }
 
+  const handleLogOut = () => {
+    dispatch(logOut())
+  }
+
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Tooltip title="Open settings">
         <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          <Avatar
+            sx={{ border: '1px dotted black' }}
+            alt={userName}
+            src={userImage}
+            variant="rounded"
+          />
         </IconButton>
       </Tooltip>
+
       <Menu
         sx={{ mt: '45px' }}
         id="menu-appbar"
@@ -45,10 +67,22 @@ const UserMenu = () => {
         onClose={handleCloseUserMenu}
       >
         {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">{setting}</Typography>
-          </MenuItem>
+          <Link
+            key={setting.value}
+            color="inherit"
+            sx={{ textDecorationLine: 'none' }}
+            href={`${setting.value}`}
+          >
+            <MenuItem>
+              <Typography textAlign="center">{setting.label}</Typography>
+            </MenuItem>
+          </Link>
         ))}
+
+        <Divider />
+        <MenuItem onClick={handleLogOut}>
+          <Typography textAlign="center">Log Out</Typography>
+        </MenuItem>
       </Menu>
     </Box>
   )
