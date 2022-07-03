@@ -4,7 +4,7 @@ import {
   PayloadAction,
   Update,
 } from '@reduxjs/toolkit'
-import { axiosInstance } from 'services/axios'
+import { authAxiosInstance } from 'services/axios'
 import products from './products'
 
 interface ProductCartType {

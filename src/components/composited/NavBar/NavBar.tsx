@@ -16,6 +16,7 @@ import { NavLink } from 'react-router-dom'
 import { Search } from 'components/base'
 import { useAppDispatch } from 'hooks'
 import { logOut } from 'redux/slices'
+import { BurgerMenu } from './BurgerMenu'
 import { UserMenu } from './UserMenu'
 
 const NavBar = () => {
@@ -27,15 +28,8 @@ const NavBar = () => {
     <Box>
       <AppBar color="primary">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+          <BurgerMenu />
+
           <Typography
             variant="h6"
             noWrap
@@ -44,6 +38,7 @@ const NavBar = () => {
           >
             Mini Store
           </Typography>
+
           <Box sx={{ flexGrow: 2 }} />
 
           <Search />

@@ -20,4 +20,6 @@ export const EXAMPLE_QUERY = {
 
 export const STORE_URL = 'https://dummyjson.com'
 
+export const AUTH_STORE_URL = 'https://dummyjson.com/auth/'
+
 export const PRODUCTS = 'products'

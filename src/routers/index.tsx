@@ -10,12 +10,13 @@ import { ForgotPassword, Login, SignUp } from 'scenes/PublicView'
 const AppRouter = () => (
   <Router>
     <Routes>
-      <Route path="/" element={<ProtectedLayout />}>
+      <Route element={<ProtectedLayout />}>
+        <Route path="/" element={<ProductList />} />
         <Route path="/products" element={<ProductList />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/carts" element={<Carts />} />
       </Route>
-      <Route path="/auth" element={<PublicLayout />}>
+      <Route element={<PublicLayout />}>
         <Route path="/auth/forgot-password" element={<ForgotPassword />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/sign-up" element={<SignUp />} />
