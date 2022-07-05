@@ -3,7 +3,7 @@ import React from 'react'
 import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 
-import { useAppDispatch } from 'hooks'
+import { useAppDispatch, useAppSelector } from 'hooks'
 import { fetchProducts } from 'redux/slices'
 import { WrapperItemsPerPage } from './style'
 
@@ -12,12 +12,13 @@ const ItemsPerPage: React.FunctionComponent<{
   onChangeItemsPerPage: (currentPage: number) => void
 }> = ({ limit, onChangeItemsPerPage }) => {
   const dispatch = useAppDispatch()
+  const token = useAppSelector((state) => state.auth.token)
 
   const handleChange = (e: SelectChangeEvent) => {
     const parsedValue = Number.parseInt(e.target.value)
     onChangeItemsPerPage(parsedValue)
 
-    dispatch(fetchProducts({ limit: parsedValue }))
+    dispatch(fetchProducts({ query: { limit: parsedValue }, token }))
   }
 
   return (

@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react'
 
 import WrapperPagination from './style'
-import { useAppDispatch } from 'hooks'
+import { useAppDispatch, useAppSelector } from 'hooks'
 import { fetchProducts } from 'redux/slices'
 
 const PageNavigation: React.FunctionComponent<{
@@ -11,12 +11,13 @@ const PageNavigation: React.FunctionComponent<{
   onChangeCurrentPage: (page: number) => void
 }> = ({ count, limit, currentPage, onChangeCurrentPage }) => {
   const dispatch = useAppDispatch()
+  const token = useAppSelector((state) => state.auth.token)
 
   const handleChange = (e: ChangeEvent<unknown>, page: number) => {
     onChangeCurrentPage(page)
 
     const skipItems = ((page - 1) * limit).toString()
-    dispatch(fetchProducts({ limit, skip: skipItems }))
+    dispatch(fetchProducts({ query: { limit, skip: skipItems }, token }))
   }
 
   return (

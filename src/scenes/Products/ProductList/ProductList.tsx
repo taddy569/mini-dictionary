@@ -13,10 +13,11 @@ import { Pagination } from 'components/composited'
 
 const ProductList: React.FunctionComponent = () => {
   const productsData = useAppSelector((state) => state.products.pagination.data)
+  const token = useAppSelector((state) => state.auth.token)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(fetchProducts(EXAMPLE_QUERY))
+    dispatch(fetchProducts({ query: EXAMPLE_QUERY, token }))
   }, [])
 
   // return (

@@ -1,9 +1,14 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 
-import { axiosInstance } from 'services/axios'
+import { axiosInstance, authAxiosInstance } from 'services/axios'
 import { generateQueryParam } from 'helpers'
 import { PRODUCTS, EXAMPLE_PRODUCT } from 'appConstants'
-import { PaginationQueryType, PaginationDataType, ProductType } from 'types'
+import {
+  AuthPaginationQueryType,
+  PaginationQueryType,
+  PaginationDataType,
+  ProductType,
+} from 'types'
 
 interface ProductsDataType {
   pagination: PaginationDataType<ProductType>
@@ -22,17 +27,24 @@ const initialState: ProductsDataType = {
 
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async (query: PaginationQueryType) => {
-    const builtQuery = generateQueryParam(PRODUCTS, query)
-    const response = await axiosInstance.get(builtQuery)
+  async (input: AuthPaginationQueryType) => {
+    const builtQuery = generateQueryParam(PRODUCTS, input.query)
+    const response = await authAxiosInstance(input.token).get(builtQuery)
     return response.data
   }
 )
 
+type GetOneProductType = {
+  productId: number
+  token: string
+}
+
 export const fetchProductById = createAsyncThunk(
   'products/fetchProductById',
-  async (productId: number) => {
-    const response = await axiosInstance.get(`/products/${productId}`)
+  async (input: GetOneProductType) => {
+    const response = await authAxiosInstance(input.token).get(
+      `/products/${input.productId}`
+    )
     return response.data
   }
 )

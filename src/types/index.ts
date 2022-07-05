@@ -4,6 +4,11 @@ export type PaginationQueryType = {
   select?: string[]
 }
 
+export type AuthPaginationQueryType = {
+  query: PaginationQueryType
+  token: string
+}
+
 export interface PaginationDataType<T> {
   limit: number
   skip: string

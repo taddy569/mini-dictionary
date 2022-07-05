@@ -62,10 +62,11 @@ const ProductDetail: React.FunctionComponent = () => {
     )
 
   const dispatch = useAppDispatch()
+  const token = useAppSelector((state) => state.auth.token)
   const parsedIntId = Number.parseInt(id)
 
   useEffect(() => {
-    dispatch(fetchProductById(parsedIntId))
+    dispatch(fetchProductById({ productId: parsedIntId, token }))
   }, [])
 
   const product = useAppSelector((state) => state.products.currentProduct)
